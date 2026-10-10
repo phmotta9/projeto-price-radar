@@ -1,0 +1,48 @@
+
+:root {
+  color-scheme: dark;
+
+  /* Fundos */
+  --color-bg: #101312;
+  --color-surface: #1C2420;
+  --color-surface-hover: #252F29;
+
+  /* Marca */
+  --color-primary: #B6F23A;
+  --color-primary-hover: #C7FF55;
+  --color-primary-bg: #29351F;
+
+  /* Textos */
+  --color-text: #F1F5F2;
+  --color-text-secondary: #A0AAA3;
+
+  /* Bordas */
+  --color-border: #303A33;
+
+  /* Estados */
+  --color-success: #72D6A0;
+  --color-danger: #FF8B8B;
+  --color-warning: #F4C76B;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: Inter, system-ui, sans-serif;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
