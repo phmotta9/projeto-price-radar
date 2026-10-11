@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Toolbar, IconButton } from '@mui/material'
+import { AppBar, Box, Button, Toolbar, IconButton, InputAdornment, TextField } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 
 export function Header() {
@@ -49,21 +49,43 @@ export function Header() {
                     </Button>
                 </Box>
 
-                <IconButton 
-                    aria-label="Pesquisar" 
-                    sx={{ 
-                        padding:'10px',
-                        '&:hover': {
-                            backgroundColor: '#1C2420'
+                <TextField
+                    placeholder="Pesquisar produtos..."
+                    slotProps={{
+                        input: {
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <IconButton sx={{ transition: 'background-color 0.6s ease',
+                                        '&:active': {
+                                            backgroundColor: '#B6F23A'
+                                    }}}>
+                                         <SearchIcon sx={{ color: '#B6F23A' }} />
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        },
+                    }}
+                    sx={{
+                        width: '300px',
+                        '& .MuiOutlinedInput-root': {
+                            color: '#F1F5F2',
+                            backgroundColor: '#1C2420',
+                        '& fieldset': {
+                            borderColor: '#38443D',
+                        },
+                        '&:hover fieldset': {
+                            borderColor: '#B6F23A',
+                        },  
+                        '&.Mui-focused fieldset': {
+                            borderColor: '#B6F23A',
+                        },
                     },
-                 }}>
-                    <SearchIcon 
-                        sx={{ 
-                            color: '#F1F5F2', 
-                            fontSize: '30px'
-                        }} 
-                    />
-                </IconButton>
+                    '& input::placeholder': {
+                        color: '#A0AAA3',
+                        opacity: 1,
+                    },
+                }}
+            />
             </Toolbar>
         </AppBar>
     )

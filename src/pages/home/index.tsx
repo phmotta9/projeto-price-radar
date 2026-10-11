@@ -1,6 +1,11 @@
-import { Box, Card, Typography } from "@mui/material"
+import { useState } from "react"
+import { ProductCard } from "../../components/productCard"
+import { ProductForm } from "../../components/productForm"
+import { Box, Card, Typography, Button, Dialog } from "@mui/material"
 
 export function Home() {
+    const [newProd, setNewProd] = useState(false)
+
     return (
         <Box sx={{
             backgroundColor: '#101312',
@@ -19,6 +24,22 @@ export function Home() {
                 <Typography sx={{ color: '#a0aaa3', fontSize: 15, mt: 0.5 }}>
                     Acompanhe preços e encontre boas oportunidades.
                 </Typography>
+
+                <Button variant="contained" onClick={() => setNewProd(true)} 
+                sx={{
+                    backgroundColor: '#b6f13a',
+                    color: '#101312',
+                    textTransform: 'none',
+                    borderRadius: '12px',
+                    padding: '5px 10px',
+                    mt: 2,
+                    transition: 'background-color 0.3s ease',
+                    '&:hover': {
+                        backgroundColor: '#9DD42F',
+                    },
+                }}>
+                    Cadastrar novo produto
+                </Button>
             </Box>
 
             <Box sx={{ display: 'flex', gap: '16px' }}>
@@ -34,6 +55,25 @@ export function Home() {
                     <Typography sx={{ color: '#72d6a0', fontSize: 13 }}>Oportunidades encontradas</Typography>
                 </Card>
             </Box>
+            <ProductCard />
+
+            <Dialog
+                open={newProd}
+                onClose={() => setNewProd(false)}
+                fullWidth
+                maxWidth="sm"
+                slotProps={{
+                    paper: {
+                        sx: {
+                            backgroundColor: "transparent",
+                            backgroundImage: "none",
+                            boxShadow: "none",
+                        },
+                    },
+                }}
+            >
+                <ProductForm />
+            </Dialog>
         </Box>
     )
 }
