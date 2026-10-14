@@ -1,5 +1,6 @@
-import { ProductCard } from '../../components/productCard'
-import { Box, Card, Typography, Button } from '@mui/material'
+import { ProductCard } from '../../components/ProductCard'
+import { Box, Typography, Button } from '@mui/material'
+import { StatCard } from '../../components/StatCard'
 
 export function Home() {
     return (
@@ -28,19 +29,12 @@ export function Home() {
             </Box>
 
             <Box sx={{ display: 'flex', gap: '16px' }}>
-                <Card sx={{ flex: 1, p: '16px', borderRadius: '12px' }}>
-                    <Typography>Produtos monitorados</Typography>
-                    <Typography sx={{ fontSize: 28, fontWeight: 700, my: 1 }}>12</Typography>
-                    <Typography sx={{ color: 'text.secondary', fontSize: 13 }}>Na sua lista</Typography>
-                </Card>
-
-                <Card sx={{ flex: 1, p: '16px', borderRadius: '12px' }}>
-                    <Typography>Economia potencial</Typography>
-                    <Typography sx={{ fontSize: 28, fontWeight: 700, my: 1, color: 'success.main' }}>R$ 245</Typography>
-                    <Typography sx={{ fontSize: 13, color: 'success.main' }}>Oportunidades encontradas</Typography>
-                </Card>
+                <StatCard title='Produtos monitorados' value={12} caption='Na sua lista' />
+                <StatCard title='Economia potencial' value='R$ 245' caption='Oportunidades encontradas' positive />
             </Box>
+
             <ProductCard />
+
         </Box>
     )
 }

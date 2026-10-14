@@ -1,50 +1,52 @@
 import { Box, Card, CardContent, Typography } from "@mui/material";
-import HeadphonesOutlinedIcon from "@mui/icons-material/HeadphonesOutlined";
+import { CameraAltOutlined } from "@mui/icons-material";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
+import type { ProductsProps } from "../features/products/types";
 
-export function ProductCard() {
+export function ProductCard(product: ProductsProps) {
+
+  function calcVariation({ currentPrice, previousPrice }: ProductsProps) {
+    if (currentPrice > previousPrice) {
+      const response = ((currentPrice - previousPrice) / previousPrice * 100)
+      
+    }
+
+  }
+
   return (
     <Card
-      sx={{
-        p: "16px",
-        backgroundColor: "#1C2420",
-        color: "#f1f5f2",
-        borderRadius: "12px",
+      sx={(theme) => ({
+        p: '16px',
+        backgroundColor: 'background.paper',
+        color: 'text-primary',
+        borderRadius: theme.shape.borderRadius,
         display: "flex",
-        flexDirection: "column", 
-        gap: "16px",
-      }}
+        gap: "10px",
+        alignItems: 'center'
+      })}
     >
-      <Box sx={{ display: "flex", gap: "16px" }}>
         <Box
           sx={{
-            width: 80,
-            height: 80,
-            flexShrink: 0,
+            width: 100,
+            height: 100,
             borderRadius: "8px",
             backgroundColor: "#2a3320",
-            color: "#b6f13a",
+            color: "primary.main",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <HeadphonesOutlinedIcon />
+          <CameraAltOutlined/>
         </Box>
 
-        <CardContent
-          sx={{ flex: 1, minWidth: 0, p: 0, "&:last-child": { pb: 0 } }}
-        >
-          <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
-            Fone Bluetooth
+        <CardContent>
+          <Typography variant="h6" component='h1' sx={{ fontWeight: 600 }}>
+            {product.name}
           </Typography>
 
-          <Typography
-            variant="h6"
-            component="p"
-            sx={{ fontWeight: 700, mt: 0.5 }}
-          >
-            R$ 299,90
+          <Typography variant="h6" component="p" sx={{ fontWeight: 700, mt: 0.5 }}>
+            {product.currentPrice}
           </Typography>
 
           <Box
@@ -53,16 +55,18 @@ export function ProductCard() {
               alignItems: "center",
               gap: 0.5,
               mt: 0.5,
-              color: "#72d6a0",
+              color: "success.main",
             }}
           >
-            <TrendingDownIcon sx={{ fontSize: 16 }} />
+            <TrendingDownIcon sx={{ fontSize: 20 }} />
             <Typography variant="body2" sx={{ color: "inherit" }}>
               15% abaixo do preço anterior
             </Typography>
+
           </Box>
+
         </CardContent>
-      </Box>
+
     </Card>
   );
 }
