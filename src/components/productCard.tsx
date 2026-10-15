@@ -1,24 +1,42 @@
 import { Box, Card, CardContent, Typography } from "@mui/material";
 import { CameraAltOutlined } from "@mui/icons-material";
-import TrendingDownIcon from "@mui/icons-material/TrendingDown";
+import { TrendingDown, TrendingUp, } from "@mui/icons-material";
 import type { ProductsProps } from "../features/products/types";
 
 export function ProductCard(product: ProductsProps) {
 
   function calcVariation({ currentPrice, previousPrice }: ProductsProps) {
     if (currentPrice > previousPrice) {
-      const response = ((currentPrice - previousPrice) / previousPrice * 100)
-      
+      const percentual = ((currentPrice - previousPrice) / previousPrice * 100)
+      return (
+        <>
+        <TrendingUp sx={{ color: 'success.main' }} />
+        <Typography variant="body2" sx={{ color: 'success.main' }}>
+          {percentual.toFixed(0)}% acima que o preço anterior
+        </Typography>
+        </>
+      )
+    } else if (currentPrice < previousPrice) {
+      const percentual = ((previousPrice - currentPrice) / previousPrice * 100)
+      return (
+        <>
+        <TrendingDown sx={{ color: 'success.main' }}/>
+        <Typography variant="body2" sx={{ color: 'success.main' }}>
+          {percentual.toFixed(0)}% abaixo do preço anterior
+        </Typography>
+        </>
+      )
     }
-
   }
+
+  const result = calcVariation(product)
 
   return (
     <Card
       sx={(theme) => ({
         p: '16px',
         backgroundColor: 'background.paper',
-        color: 'text-primary',
+        color: 'text.primary',
         borderRadius: theme.shape.borderRadius,
         display: "flex",
         gap: "10px",
@@ -41,12 +59,12 @@ export function ProductCard(product: ProductsProps) {
         </Box>
 
         <CardContent>
-          <Typography variant="h6" component='h1' sx={{ fontWeight: 600 }}>
+          <Typography variant="h6" component='h3' sx={{ fontWeight: 600 }}>
             {product.name}
           </Typography>
 
           <Typography variant="h6" component="p" sx={{ fontWeight: 700, mt: 0.5 }}>
-            {product.currentPrice}
+            {product.currentPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
           </Typography>
 
           <Box
@@ -55,14 +73,9 @@ export function ProductCard(product: ProductsProps) {
               alignItems: "center",
               gap: 0.5,
               mt: 0.5,
-              color: "success.main",
             }}
           >
-            <TrendingDownIcon sx={{ fontSize: 20 }} />
-            <Typography variant="body2" sx={{ color: "inherit" }}>
-              15% abaixo do preço anterior
-            </Typography>
-
+            {result}
           </Box>
 
         </CardContent>

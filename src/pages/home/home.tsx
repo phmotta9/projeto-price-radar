@@ -33,7 +33,16 @@ export function Home() {
                 <StatCard title='Economia potencial' value='R$ 245' caption='Oportunidades encontradas' positive />
             </Box>
 
-            <ProductCard />
+            <ProductCard
+            id={5}
+            name='Fone'
+            store='Amazon'
+            category='Eletrônicos'
+            currentPrice={100}
+            previousPrice={80}
+            targetPrice={90}
+            isFavorite={false}
+            />
 
         </Box>
     )
