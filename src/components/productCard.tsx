@@ -1,85 +1,68 @@
-import { Box, Card, CardContent, Typography } from "@mui/material";
-import { CameraAltOutlined } from "@mui/icons-material";
-import { TrendingDown, TrendingUp, } from "@mui/icons-material";
-import type { ProductsProps } from "../features/products/types";
+import { Box, Card, CardContent, Typography, alpha } from '@mui/material';
+import { TrendingDown, TrendingUp, CameraAltOutlined } from '@mui/icons-material';
+import type { Product } from '../features/products/types';
+import { calcVariation } from '../utils/calcVariation';
 
-export function ProductCard(product: ProductsProps) {
+type ProductCardProps = {
+  product: Product
+}
 
-  function calcVariation({ currentPrice, previousPrice }: ProductsProps) {
-    if (currentPrice > previousPrice) {
-      const percentual = ((currentPrice - previousPrice) / previousPrice * 100)
-      return (
-        <>
-        <TrendingUp sx={{ color: 'success.main' }} />
-        <Typography variant="body2" sx={{ color: 'success.main' }}>
-          {percentual.toFixed(0)}% acima que o preço anterior
-        </Typography>
-        </>
-      )
-    } else if (currentPrice < previousPrice) {
-      const percentual = ((previousPrice - currentPrice) / previousPrice * 100)
-      return (
-        <>
-        <TrendingDown sx={{ color: 'success.main' }}/>
-        <Typography variant="body2" sx={{ color: 'success.main' }}>
-          {percentual.toFixed(0)}% abaixo do preço anterior
-        </Typography>
-        </>
-      )
-    }
-  }
-
-  const result = calcVariation(product)
+export function ProductCard({ product }: ProductCardProps) {
+  const variation = calcVariation(product.currentPrice, product.previousPrice)
+  const isDrop = variation !== null && variation < 0;
 
   return (
     <Card
       sx={(theme) => ({
         p: '16px',
-        backgroundColor: 'background.paper',
-        color: 'text.primary',
         borderRadius: theme.shape.borderRadius,
-        display: "flex",
-        gap: "10px",
-        alignItems: 'center'
+        display: 'flex',
+        gap: '10px',
+        alignItems: 'center',
+        height: 140,
       })}
     >
-        <Box
-          sx={{
-            width: 100,
-            height: 100,
-            borderRadius: "8px",
-            backgroundColor: "#2a3320",
-            color: "primary.main",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <CameraAltOutlined/>
-        </Box>
+      <Box
+        sx={(theme) => ({
+          width: 100,
+          height: 100,
+          borderRadius: theme.shape.borderRadius,
+          backgroundColor: alpha(theme.palette.primary.main, 0.2),
+          color: 'primary.main',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        })}
+      >
+        <CameraAltOutlined />
+      </Box>
 
-        <CardContent>
-          <Typography variant="h6" component='h3' sx={{ fontWeight: 600 }}>
-            {product.name}
-          </Typography>
+      <CardContent>
+        <Typography variant='h6' component='h3' sx={{ fontWeight: 600 }}>
+          {product.name}
+        </Typography>
 
-          <Typography variant="h6" component="p" sx={{ fontWeight: 700, mt: 0.5 }}>
-            {product.currentPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-          </Typography>
+        <Typography variant='h6' component='p' sx={{ fontWeight: 700, mt: 0.5 }}>
+          {product.currentPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+        </Typography>
 
+        {variation !== null && variation !== 0 && (
           <Box
             sx={{
-              display: "flex",
-              alignItems: "center",
+              display: 'flex',
+              alignItems: 'center',
               gap: 0.5,
               mt: 0.5,
+              color: 'success.main',
             }}
           >
-            {result}
+            {isDrop ? <TrendingDown /> : <TrendingUp />}
+            <Typography variant='body2'>
+              {Math.abs(variation).toFixed(0)}% {isDrop ? 'abaixo' : 'acima'} do preço anterior
+            </Typography>
           </Box>
-
-        </CardContent>
-
+        )}
+      </CardContent>
     </Card>
   );
 }

@@ -1,4 +1,4 @@
-import { Card, Typography } from "@mui/material";
+import { Card, Typography } from '@mui/material';
 
 type StatCardProps = {
     title: string;

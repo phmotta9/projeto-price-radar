@@ -5,7 +5,7 @@ import { SearchInput } from './SearchInput';
 export function Header() {
     return (
         <AppBar
-            position="static"
+            position='static'
             sx={{
                 height: '100px',
                 justifyContent: 'center',
@@ -20,47 +20,46 @@ export function Header() {
                     justifyContent: 'space-between',
                 }}
             >
-                <Typography variant="h1" component="h1">
+                <Typography variant='h1' component='h1'>
                     Price Radar
                 </Typography>
 
                 <Box sx={{ display: 'flex', gap: 3 }}>
-                    <Button component={NavLink} to="/" end sx={{
-                        '&.active':{
+                    <Button component={NavLink} to='/' end sx={{
+                        '&.active': {
                             backgroundColor: 'background.paper',
                         },
-                        '&:hover':{
+                        '&:hover': {
                             backgroundColor: 'background.paper',
                         }
-                     }}>
+                    }}>
                         Início
                     </Button>
 
-                    <Button component={NavLink} to="/favorites" sx={{
-                        '&.active':{
+                    <Button component={NavLink} to='/favorites' sx={{
+                        '&.active': {
                             backgroundColor: 'background.paper',
                         },
-                        '&:hover':{
+                        '&:hover': {
                             backgroundColor: 'background.paper',
                         }
-                     }}>
+                    }}>
                         Favoritos
                     </Button>
 
-                    <Button component={NavLink} to="/deals" sx={{
-                        '&.active':{
+                    <Button component={NavLink} to='/deals' sx={{
+                        '&.active': {
                             backgroundColor: 'background.paper',
                         },
-                        '&:hover':{
+                        '&:hover': {
                             backgroundColor: 'background.paper',
                         }
-                     }}>
+                    }}>
                         Ofertas
                     </Button>
                 </Box>
 
-                <SearchInput/>
-
+                <SearchInput />
             </Toolbar>
         </AppBar>
     )

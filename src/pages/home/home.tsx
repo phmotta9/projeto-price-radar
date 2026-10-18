@@ -10,20 +10,20 @@ export function Home() {
             flexDirection: 'column',
             gap: '16px',
         }}>
-    
+
             <Box>
-                <Typography variant="h4" component="h2" sx={{ mt: 0.5 }}>
+                <Typography variant='h4' component='h2' sx={{ mt: 0.5 }}>
                     Seus produtos
                 </Typography>
                 <Typography sx={{ color: 'text.secondary', fontSize: 15, mt: 0.5 }}>
                     Acompanhe preços e encontre boas oportunidades.
                 </Typography>
 
-                <Button variant="contained" 
-                sx={{
-                    padding: '5px 10px',
-                    mt: 2,
-                }}>
+                <Button variant='contained'
+                    sx={{
+                        padding: '5px 10px',
+                        mt: 2,
+                    }}>
                     Cadastrar novo produto
                 </Button>
             </Box>
@@ -34,14 +34,16 @@ export function Home() {
             </Box>
 
             <ProductCard
-            id={5}
-            name='Fone'
-            store='Amazon'
-            category='Eletrônicos'
-            currentPrice={100}
-            previousPrice={80}
-            targetPrice={90}
-            isFavorite={false}
+                product={{
+                    id: 5,
+                    name: 'Fone',
+                    store: 'Amazon',
+                    category: 'Eletrônicos',
+                    currentPrice: 100,
+                    previousPrice: 80,
+                    targetPrice: 90,
+                    isFavorite: false,
+                }}
             />
 
         </Box>
