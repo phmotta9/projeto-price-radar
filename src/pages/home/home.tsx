@@ -1,6 +1,7 @@
 import { ProductCard } from '../../components/ProductCard'
 import { Box, Typography, Button } from '@mui/material'
 import { StatCard } from '../../components/StatCard'
+import { products } from '../../features/products/mockProducts'
 
 export function Home() {
     return (
@@ -33,18 +34,11 @@ export function Home() {
                 <StatCard title='Economia potencial' value='R$ 245' caption='Oportunidades encontradas' positive />
             </Box>
 
-            <ProductCard
-                product={{
-                    id: 5,
-                    name: 'Fone',
-                    store: 'Amazon',
-                    category: 'Eletrônicos',
-                    currentPrice: 100,
-                    previousPrice: 80,
-                    targetPrice: 90,
-                    isFavorite: false,
-                }}
-            />
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px'}}>
+              {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+            ))}
+            </Box>
 
         </Box>
     )
