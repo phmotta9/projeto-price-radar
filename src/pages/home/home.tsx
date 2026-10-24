@@ -1,9 +1,11 @@
 import { ProductCard } from '../../components/ProductCard'
 import { Box, Typography, Button } from '@mui/material'
 import { StatCard } from '../../components/StatCard'
-import { products } from '../../features/products/mockProducts'
+import { useAppSelector } from '../../app/hooks'
 
 export function Home() {
+    const products = useAppSelector((state) => state.products);
+
     return (
         <Box sx={{
             padding: '20px',
